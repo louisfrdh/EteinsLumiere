@@ -13,6 +13,11 @@ import javax.swing.JPanel;
 import controllers.GrilleController;
 import models.Grille;
 
+/**
+ * Vue des boutons de configuration du jeu
+ * @author friedrich
+ *
+ */
 @SuppressWarnings("serial")
 public class MenuView extends JPanel{
 	
@@ -21,7 +26,7 @@ public class MenuView extends JPanel{
 
 	public MenuView(GrilleController gc) {
 		this.gc = gc;
-		setPreferredSize(new Dimension(GrilleView.TAILLE_FENETRE,HAUTEUR));
+		setPreferredSize(new Dimension(GrilleView.LARGEUR,HAUTEUR));
 		ajouteBoutonEff();
 		ajouteBoutonAleatoire();
 		ajouteBoutonJouer();

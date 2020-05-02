@@ -1,5 +1,10 @@
 package models;
 
+/**
+ * Modèle d'une case de grille
+ * @author friedrich
+ *
+ */
 @SuppressWarnings("deprecation")
 public class Case {
 	
@@ -29,7 +34,7 @@ public class Case {
 	}
 	
 	/**
-	 * Eteint ou allume la lampe de la case
+	 * Eteint ou allume la lumière dans la case
 	 * @param etat allumé ou éteint
 	 */
 	public void setOn(boolean etat) {

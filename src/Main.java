@@ -9,6 +9,7 @@ import views.GrilleView;
 import views.MenuView;
 
 public class Main {
+	
 	public static void main (String[] args) {
 		
 		Grille g = new Grille();

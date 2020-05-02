@@ -86,7 +86,7 @@ public class Grille extends Observable{
 	}
 	
 	/**
-	 * Eteint toutes les lampes
+	 * Eteint toutes les lumières
 	 */
 	public void effacer() {
 		for(int i=0 ; i < TAILLE ; i++) {
@@ -100,7 +100,7 @@ public class Grille extends Observable{
 	}
 	
 	/**
-	 * Créé une disposition aléatoire de lampes allumées
+	 * Créé une disposition aléatoire de lumières
 	 */
 	public void melanger() {
 		int x, y;

@@ -7,6 +7,11 @@ import models.Case;
 import models.Grille;
 import views.GrilleView;
 
+/**
+ * Contôleur du modèle Grille
+ * @author friedrich
+ *
+ */
 public class GrilleController implements MouseListener {
 
 	Grille g;
@@ -23,8 +28,13 @@ public class GrilleController implements MouseListener {
 		g.toucherCase(iCase, jCase);
 	}
 	
+	/**
+	 * Trouve la ligne dans laquelle l'utilisateur a cliqué
+	 * @param e l'événement de clic
+	 * @return l'indice i
+	 */
 	private static int trouverI(MouseEvent e) {
-		switch (e.getX() / (GrilleView.TAILLE_FENETRE / Grille.TAILLE)) {
+		switch (e.getX() / (GrilleView.LARGEUR / Grille.TAILLE)) {
 		case 0:
 			return 0;
 		case 1:
@@ -40,8 +50,13 @@ public class GrilleController implements MouseListener {
 		}
 	}
 	
+	/**
+	 * Trouve la colonne dans laquelle l'utilisateur a cliqué
+	 * @param e l'événement de clic
+	 * @return l'indice j
+	 */
 	private static int trouverJ(MouseEvent e) {
-		switch (e.getY() / (GrilleView.TAILLE_FENETRE / Grille.TAILLE)) {
+		switch (e.getY() / (GrilleView.LARGEUR / Grille.TAILLE)) {
 		case 0:
 			return 0;
 		case 1:
@@ -57,10 +72,16 @@ public class GrilleController implements MouseListener {
 		}
 	}
 	
+	/**
+	 * Eteint toutes les lumières
+	 */
 	public void effacerGrille() {
 		g.effacer();
 	}
 	
+	/**
+	 * Créé une disposition aléatoire de lumières
+	 */
 	public void melangerGrille() {
 		g.melanger();
 	}

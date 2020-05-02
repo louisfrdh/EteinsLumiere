@@ -12,6 +12,11 @@ import javax.swing.JTextPane;
 import controllers.GrilleController;
 import models.Grille;
 
+/**
+ * Vue compteur de clics
+ * @author friedrich
+ *
+ */
 @SuppressWarnings({ "deprecation", "serial" })
 public class CompteurView extends JPanel implements Observer {
 
@@ -25,11 +30,14 @@ public class CompteurView extends JPanel implements Observer {
 	
 	public CompteurView(GrilleController gc) {
 		this.gc = gc;
-		setPreferredSize(new Dimension(GrilleView.TAILLE_FENETRE,HAUTEUR));
+		setPreferredSize(new Dimension(GrilleView.LARGEUR,HAUTEUR));
 		gc.getGrille().addObserver(this);
 		ajouteAffCpt();
 	}
 	
+	/**
+	 * Ajoute un compteur de clics à la vue
+	 */
 	public void ajouteAffCpt() {
 		JPanel jp = new JPanel();
 		JLabel titre = new JLabel("Nb de clic(s) : ");

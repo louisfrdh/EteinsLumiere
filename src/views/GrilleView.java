@@ -11,10 +11,15 @@ import javax.swing.JPanel;
 import controllers.GrilleController;
 import models.Grille;
 
+/**
+ * Vue de la grille de jeu
+ * @author friedrich
+ *
+ */
 @SuppressWarnings({ "deprecation", "serial" })
 public class GrilleView extends JPanel implements Observer{
 	
-	public static final int TAILLE_FENETRE = 500;
+	public static final int LARGEUR = 500;
 	private GrilleController gc;
 
 	@Override
@@ -24,14 +29,14 @@ public class GrilleView extends JPanel implements Observer{
 
 	public GrilleView(GrilleController gc) {
 		this.gc = gc;
-		setPreferredSize(new Dimension(TAILLE_FENETRE+Grille.TAILLE-1,TAILLE_FENETRE+Grille.TAILLE-1));
+		setPreferredSize(new Dimension(LARGEUR+Grille.TAILLE-1,LARGEUR+Grille.TAILLE-1));
 		gc.getGrille().addObserver(this);
 		addMouseListener(gc);
 	}
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		int lCase = TAILLE_FENETRE / Grille.TAILLE;
+		int lCase = LARGEUR / Grille.TAILLE;
 		int x=0;
 		int y=0;
 		for(int i=0 ; i < Grille.TAILLE ; i++) {

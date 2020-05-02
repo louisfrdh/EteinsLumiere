@@ -1,11 +1,8 @@
 package models;
 
-import java.util.Observable;
-
 @SuppressWarnings("deprecation")
-public class Case extends Observable {
+public class Case {
 	
-	private static final int TAILLE = 20;
 	private int x, y;
 	private boolean on;
 	

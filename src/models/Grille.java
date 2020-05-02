@@ -5,7 +5,7 @@ import java.util.Observable;
 @SuppressWarnings("deprecation")
 public class Grille extends Observable{
 	
-	private static final int TAILLE = 5;
+	public static final int TAILLE = 5;
 	private static int NBLUMIERES = 8;
 	private Case[][] cases;
 	

@@ -33,9 +33,23 @@ public class Grille extends Observable{
 		for(int i = indiceX-1 ; i <= indiceX+1 ; i++) {
 			if (i == indiceX) {
 				for(int j = indiceY-1 ; j <= indiceY+1 ; j++) {
-					adjacentes[p] = cases[i][j];
-					p++;
+					if(j >= TAILLE) {
+						adjacentes[p] = cases[i][0];
+						p++;
+					} else if(j < 0) {
+						adjacentes[p] = cases[i][TAILLE-1];
+						p++;
+					} else {
+						adjacentes[p] = cases[i][j];
+						p++;
+					}
 				}				
+			} else if(i >= TAILLE){
+				adjacentes[p] = cases[0][indiceY];
+				p++;
+			} else if(i < 0){
+				adjacentes[p] = cases[TAILLE-1][indiceY];
+				p++;
 			} else {
 				adjacentes[p] = cases[i][indiceY];
 				p++;
@@ -48,10 +62,13 @@ public class Grille extends Observable{
 	 * Modifie l'état des cases affectées par un clic
 	 * @param le tableau contenant les cases affectées
 	 */
-	public static void toucherCase(Case[] affectees) {
+	public void toucherCase(int indiceX, int indiceY) {
+		Case affectees[] = this.trouverAdj(indiceX, indiceY);
 		for(Case c : affectees) {
 			c.changerEtat();
 		}
+		this.setChanged();
+		this.notifyObservers();
 	}
 	
 	public Case[][] getCases() {

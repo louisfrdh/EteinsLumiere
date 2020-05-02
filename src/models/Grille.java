@@ -3,14 +3,12 @@ package models;
 import java.util.Observable;
 
 /**
- * Singleton de la grille
+ * Modèle d'une grille de jeu
  * @author friedrich
  *
  */
 @SuppressWarnings("deprecation")
 public class Grille extends Observable{
-	
-	private static Grille GRILLE = new Grille();
 	
 	public static final int TAILLE = 5;
 	private Case[][] cases;
@@ -20,7 +18,7 @@ public class Grille extends Observable{
 	/**
 	 * Constructeur avec taille par défaut
 	 */
-	private Grille() {
+	public Grille() {
 		cases = new Case[TAILLE][TAILLE];
 		for(int i=0 ; i < TAILLE ; i++) {
 			for(int j=0 ; j < TAILLE ; j++) {
@@ -30,17 +28,6 @@ public class Grille extends Observable{
 		melanger();
 		enJeu = true;
 		cpt = 0;
-	}
-	
-	/**
-	 * Getter du singleton
-	 * @return l'instance de la grille
-	 */
-	public static Grille getGrille() {
-        if(GRILLE == null) {
-        	GRILLE = new Grille();
-        }
-        return GRILLE;
 	}
 	
 	/**

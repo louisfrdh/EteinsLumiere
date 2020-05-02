@@ -1,5 +1,3 @@
-import java.awt.BorderLayout;
-
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -11,13 +9,13 @@ import views.GrilleView;
 import views.MenuView;
 
 public class Main {
-	@SuppressWarnings("deprecation")
 	public static void main (String[] args) {
 		
-		Grille g = Grille.getGrille();
-		GrilleView gv = new GrilleView();
-		MenuView mv = new MenuView();
-		CompteurView cv = new CompteurView();
+		Grille g = new Grille();
+		GrilleController gc = new GrilleController(g);
+		GrilleView gv = new GrilleView(gc);
+		MenuView mv = new MenuView(gc);
+		CompteurView cv = new CompteurView(gc);
 		
 		JPanel jeu = new JPanel();
 		jeu.setLayout(new BoxLayout(jeu, BoxLayout.Y_AXIS));

@@ -10,14 +10,17 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import controllers.GrilleController;
 import models.Grille;
 
 @SuppressWarnings("serial")
 public class MenuView extends JPanel{
 	
 	public final static int HAUTEUR = 40;
+	private GrilleController gc;
 
-	public MenuView() {
+	public MenuView(GrilleController gc) {
+		this.gc = gc;
 		setPreferredSize(new Dimension(GrilleView.TAILLE_FENETRE,HAUTEUR));
 		ajouteBoutonEff();
 		ajouteBoutonAleatoire();
@@ -34,7 +37,7 @@ public class MenuView extends JPanel{
 		eff.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Grille.getGrille().effacer();
+				gc.effacerGrille();
 			}	
 		});
 		this.add(eff);
@@ -45,7 +48,7 @@ public class MenuView extends JPanel{
 		aleatoire.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Grille.getGrille().melanger();
+				gc.melangerGrille();
 			}	
 		});
 		this.add(aleatoire);
@@ -56,7 +59,7 @@ public class MenuView extends JPanel{
 		jouer.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Grille.getGrille().setEnJeu(true);
+				gc.setEnJeu(true);
 			}	
 		});
 		this.add(jouer);
@@ -67,7 +70,7 @@ public class MenuView extends JPanel{
 		conf.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Grille.getGrille().setEnJeu(false);
+				gc.setEnJeu(false);
 			}	
 		});
 		this.add(conf);

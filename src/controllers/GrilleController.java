@@ -3,21 +3,24 @@ package controllers;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import models.Case;
 import models.Grille;
 import views.GrilleView;
 
 public class GrilleController implements MouseListener {
 
+	Grille g;
 	private int iCase, jCase;
 	
-	public GrilleController() {
+	public GrilleController(Grille g) {
+		this.g = g;
 	}
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		iCase = trouverI(e);
 		jCase = trouverJ(e);
-		Grille.getGrille().toucherCase(iCase, jCase);
+		g.toucherCase(iCase, jCase);
 	}
 	
 	private static int trouverI(MouseEvent e) {
@@ -53,29 +56,33 @@ public class GrilleController implements MouseListener {
 			return 0;
 		}
 	}
-
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	
+	public void effacerGrille() {
+		g.effacer();
 	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	
+	public void melangerGrille() {
+		g.melanger();
 	}
-
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	
+	public void setEnJeu(boolean etat) {
+		g.setEnJeu(etat);
 	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	
+	public int getCpt() {
+		return g.getCpt();
 	}
+	
+	public Case getCase(int x, int y) {
+		return g.getCase(x, y);
+	}
+	
+	public Grille getGrille() {
+		return g;
+	}
+	public void mouseEntered(MouseEvent arg0) {}
+	public void mouseExited(MouseEvent arg0) {}
+	public void mousePressed(MouseEvent arg0) {}
+	public void mouseReleased(MouseEvent arg0) {	}
 
 }

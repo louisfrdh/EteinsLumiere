@@ -15,16 +15,17 @@ import models.Grille;
 public class GrilleView extends JPanel implements Observer{
 	
 	public static final int TAILLE_FENETRE = 500;
+	private GrilleController gc;
 
 	@Override
 	public void update(Observable o, Object arg) {
 		repaint();
 	}
 
-	public GrilleView() {
+	public GrilleView(GrilleController gc) {
+		this.gc = gc;
 		setPreferredSize(new Dimension(TAILLE_FENETRE+Grille.TAILLE-1,TAILLE_FENETRE+Grille.TAILLE-1));
-		Grille.getGrille().addObserver(this);
-		GrilleController gc = new GrilleController();
+		gc.getGrille().addObserver(this);
 		addMouseListener(gc);
 	}
 	
@@ -36,7 +37,7 @@ public class GrilleView extends JPanel implements Observer{
 		for(int i=0 ; i < Grille.TAILLE ; i++) {
 			y=0;
 			for(int j=0 ; j < Grille.TAILLE ; j++) {
-				boolean etatCase = Grille.getGrille().getCase(i, j).getOn();
+				boolean etatCase = gc.getCase(i, j).getOn();
 				if(etatCase) {
 					g.setColor(Color.green);
 				} else {

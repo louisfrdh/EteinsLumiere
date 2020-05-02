@@ -8,18 +8,16 @@ import views.GrilleView;
 
 public class GrilleController implements MouseListener {
 
-	private Grille g;
 	private int iCase, jCase;
 	
-	public GrilleController(Grille g) {
-		this.g = g;
+	public GrilleController() {
 	}
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		iCase = trouverI(e);
 		jCase = trouverJ(e);
-		g.toucherCase(iCase, jCase);
+		Grille.getGrille().toucherCase(iCase, jCase);
 	}
 	
 	private static int trouverI(MouseEvent e) {
@@ -35,8 +33,7 @@ public class GrilleController implements MouseListener {
 		case 4:
 			return 4;
 		default:
-			System.out.println(e.getY());
-			return 4;
+			return 0;
 		}
 	}
 	
@@ -53,8 +50,7 @@ public class GrilleController implements MouseListener {
 		case 4:
 			return 4;
 		default:
-			System.out.println(e.getY());
-			return 4;
+			return 0;
 		}
 	}
 

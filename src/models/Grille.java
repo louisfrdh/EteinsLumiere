@@ -2,23 +2,45 @@ package models;
 
 import java.util.Observable;
 
+/**
+ * Singleton de la grille
+ * @author friedrich
+ *
+ */
 @SuppressWarnings("deprecation")
 public class Grille extends Observable{
 	
+	private static Grille GRILLE = new Grille();
+	
 	public static final int TAILLE = 5;
-	private static int NBLUMIERES = 8;
 	private Case[][] cases;
+	private int cpt;
+	private boolean enJeu;
 	
 	/**
 	 * Constructeur avec taille par défaut
 	 */
-	public Grille() {
+	private Grille() {
 		cases = new Case[TAILLE][TAILLE];
 		for(int i=0 ; i < TAILLE ; i++) {
 			for(int j=0 ; j < TAILLE ; j++) {
 				cases[i][j] = new Case(i, j);
 			}
 		}
+		melanger();
+		enJeu = true;
+		cpt = 0;
+	}
+	
+	/**
+	 * Getter du singleton
+	 * @return l'instance de la grille
+	 */
+	public static Grille getGrille() {
+        if(GRILLE == null) {
+        	GRILLE = new Grille();
+        }
+        return GRILLE;
 	}
 	
 	/**
@@ -63,12 +85,53 @@ public class Grille extends Observable{
 	 * @param le tableau contenant les cases affectées
 	 */
 	public void toucherCase(int indiceX, int indiceY) {
-		Case affectees[] = this.trouverAdj(indiceX, indiceY);
-		for(Case c : affectees) {
-			c.changerEtat();
+		if(enJeu) {
+			cpt++;
+			Case affectees[] = this.trouverAdj(indiceX, indiceY);
+			for(Case c : affectees) {
+				c.changerEtat();
+			}
+		} else {
+			cases[indiceX][indiceY].changerEtat();
 		}
 		this.setChanged();
 		this.notifyObservers();
+	}
+	
+	/**
+	 * Eteint toutes les lampes
+	 */
+	public void effacer() {
+		for(int i=0 ; i < TAILLE ; i++) {
+			for(int j=0 ; j < TAILLE ; j++) {
+				cases[i][j].setOn(false);
+			}
+		}
+		cpt = 0;
+		this.setChanged();
+		this.notifyObservers();
+	}
+	
+	/**
+	 * Créé une disposition aléatoire de lampes allumées
+	 */
+	public void melanger() {
+		int x, y;
+		for(int i=0 ; i < 8 ; i++) {
+			x = (int) (Math.random()*4);
+			y = (int) (Math.random()*4);
+			this.getCase(x, y).changerEtat();
+		}
+		this.setChanged();
+		this.notifyObservers();
+	}
+	
+	public void setEnJeu(boolean etat) {
+		enJeu = etat;
+	}
+	
+	public boolean getEnJeu() {
+		return enJeu;
 	}
 	
 	public Case[][] getCases() {
@@ -77,5 +140,9 @@ public class Grille extends Observable{
 	
 	public Case getCase(int x, int y) {
 		return cases[x][y];
+	}
+	
+	public int getCpt() {
+		return cpt;
 	}
 }

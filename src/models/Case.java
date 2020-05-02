@@ -28,6 +28,14 @@ public class Case {
 		}
 	}
 	
+	/**
+	 * Eteint ou allume la lampe de la case
+	 * @param etat allumé ou éteint
+	 */
+	public void setOn(boolean etat) {
+		on = etat;
+	}
+	
 	public boolean getOn() {
 		return on;
 	}

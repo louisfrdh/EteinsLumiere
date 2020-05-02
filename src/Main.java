@@ -1,32 +1,34 @@
+import java.awt.BorderLayout;
+
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import controllers.GrilleController;
 import models.Grille;
+import views.CompteurView;
 import views.GrilleView;
+import views.MenuView;
 
 public class Main {
 	@SuppressWarnings("deprecation")
 	public static void main (String[] args) {
 		
-		/*
-		Grille g = new Grille();
-		g.toucherCase(0,2);
-		for(int i=0 ; i < 5 ; i++) {
-			for(int j=0 ; j < 5 ; j++) {
-				System.out.println("Case (" + i + " ; " + j + ") : " + g.getCase(i,j).getOn());
-			}
-		}*/
+		Grille g = Grille.getGrille();
+		GrilleView gv = new GrilleView();
+		MenuView mv = new MenuView();
+		CompteurView cv = new CompteurView();
 		
-
+		JPanel jeu = new JPanel();
+		jeu.setLayout(new BoxLayout(jeu, BoxLayout.Y_AXIS));
+		jeu.add(cv);
+		jeu.add(gv);
+		jeu.add(mv);
+		
 		JFrame fenetre = new JFrame("Eteins la lumière !");
 		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		Grille g = new Grille();
-		GrilleController gc = new GrilleController(g);
-		GrilleView gw = new GrilleView(g);
-		gw.addMouseListener(gc);
 		
-		fenetre.setContentPane(gw);
+		fenetre.setContentPane(jeu);
 		fenetre.pack();
 		fenetre.setVisible(true);
 	}

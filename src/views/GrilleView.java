@@ -8,24 +8,24 @@ import java.util.Observer;
 
 import javax.swing.JPanel;
 
+import controllers.GrilleController;
 import models.Grille;
 
 @SuppressWarnings({ "deprecation", "serial" })
 public class GrilleView extends JPanel implements Observer{
 	
 	public static final int TAILLE_FENETRE = 500;
-	private Grille grille;
 
 	@Override
 	public void update(Observable o, Object arg) {
-		grille = (Grille)o;
 		repaint();
 	}
 
-	public GrilleView(Grille g) {
-		grille = g;
-		g.addObserver(this);
+	public GrilleView() {
 		setPreferredSize(new Dimension(TAILLE_FENETRE+Grille.TAILLE-1,TAILLE_FENETRE+Grille.TAILLE-1));
+		Grille.getGrille().addObserver(this);
+		GrilleController gc = new GrilleController();
+		addMouseListener(gc);
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -36,7 +36,7 @@ public class GrilleView extends JPanel implements Observer{
 		for(int i=0 ; i < Grille.TAILLE ; i++) {
 			y=0;
 			for(int j=0 ; j < Grille.TAILLE ; j++) {
-				boolean etatCase = grille.getCase(i, j).getOn();
+				boolean etatCase = Grille.getGrille().getCase(i, j).getOn();
 				if(etatCase) {
 					g.setColor(Color.green);
 				} else {
@@ -47,7 +47,5 @@ public class GrilleView extends JPanel implements Observer{
 			}
 			x += lCase+1;
 		}
-		
 	}
-
 }

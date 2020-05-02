@@ -9,6 +9,9 @@ public class Grille extends Observable{
 	private static int NBLUMIERES = 8;
 	private Case[][] cases;
 	
+	/**
+	 * Constructeur avec taille par défaut
+	 */
 	public Grille() {
 		cases = new Case[TAILLE][TAILLE];
 		for(int i=0 ; i < TAILLE ; i++) {
@@ -20,7 +23,8 @@ public class Grille extends Observable{
 	
 	/**
 	 * Cherche les cases concernées par un clic
-	 * @param c la case ciblée par le clic
+	 * @param indiceX ligne de la case ciblée
+	 * @param indiceY colonne de la case ciblée
 	 * @return le tableau contenant les cases affectées
 	 */
 	public Case[] trouverAdj(int indiceX, int indiceY) {

@@ -11,8 +11,8 @@ public class Case extends Observable {
 	
 	/**
 	 * Constructeur avec indices de la case
-	 * @param i l'indice de colonne x
-	 * @param j l'indice de ligne y
+	 * @param i l'indice de ligne x
+	 * @param j l'indice de colonne y
 	 */
 	public Case(int i, int j) {
 		x = i;
@@ -20,6 +20,9 @@ public class Case extends Observable {
 		on = false;
 	}
 	
+	/**
+	 * Inverse l'état de la case
+	 */
 	public void changerEtat() {
 		if(getOn()) {
 			on = false;
@@ -39,7 +42,4 @@ public class Case extends Observable {
 	public int getY() {
 		return y;
 	}
-	
-	
-	
 }

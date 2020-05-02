@@ -20,6 +20,18 @@ public class Case extends Observable {
 		on = false;
 	}
 	
+	public void changerEtat() {
+		if(getOn()) {
+			on = false;
+		} else {
+			on = true;
+		}
+	}
+	
+	public boolean getOn() {
+		return on;
+	}
+	
 	public int getX() {
 		return x;
 	}
@@ -28,9 +40,6 @@ public class Case extends Observable {
 		return y;
 	}
 	
-	public boolean getOn() {
-		return on;
-	}
 	
 	
 }

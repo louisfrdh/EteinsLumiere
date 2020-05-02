@@ -23,11 +23,9 @@ public class Grille extends Observable{
 	 * @param c la case ciblée par le clic
 	 * @return le tableau contenant les cases affectées
 	 */
-	public Case[] trouverAdj(Case c) {
+	public Case[] trouverAdj(int indiceX, int indiceY) {
 		Case adjacentes[] = new Case[5];
 		int p = 0;
-		int indiceX = c.getX();
-		int indiceY = c.getY();
 		for(int i = indiceX-1 ; i <= indiceX+1 ; i++) {
 			if (i == indiceX) {
 				for(int j = indiceY-1 ; j <= indiceY+1 ; j++) {
@@ -46,10 +44,17 @@ public class Grille extends Observable{
 	 * Modifie l'état des cases affectées par un clic
 	 * @param le tableau contenant les cases affectées
 	 */
-	public void toucherCase(Case[] affectees) {
+	public static void toucherCase(Case[] affectees) {
+		for(Case c : affectees) {
+			c.changerEtat();
+		}
 	}
 	
 	public Case[][] getCases() {
 		return cases;
+	}
+	
+	public Case getCase(int x, int y) {
+		return cases[x][y];
 	}
 }

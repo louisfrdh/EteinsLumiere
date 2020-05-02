@@ -9,13 +9,12 @@ import java.util.Observer;
 import javax.swing.JPanel;
 
 import models.Grille;
-import models.Case;
 
 @SuppressWarnings({ "deprecation", "serial" })
 public class GrilleView extends JPanel implements Observer{
 	
-	private static final int TAILLE_FENETRE = 500;
-	private Grille grille = new Grille();;
+	public static final int TAILLE_FENETRE = 500;
+	private Grille grille;
 
 	@Override
 	public void update(Observable o, Object arg) {
@@ -23,7 +22,9 @@ public class GrilleView extends JPanel implements Observer{
 		repaint();
 	}
 
-	public GrilleView() {
+	public GrilleView(Grille g) {
+		grille = g;
+		g.addObserver(this);
 		setPreferredSize(new Dimension(TAILLE_FENETRE+Grille.TAILLE-1,TAILLE_FENETRE+Grille.TAILLE-1));
 	}
 	

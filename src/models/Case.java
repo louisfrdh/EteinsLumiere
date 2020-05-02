@@ -5,7 +5,6 @@ package models;
  * @author friedrich
  *
  */
-@SuppressWarnings("deprecation")
 public class Case {
 	
 	private int x, y;

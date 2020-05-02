@@ -8,10 +8,7 @@ import java.util.Observer;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextPane;
-
 import controllers.GrilleController;
-import models.Grille;
 
 /**
  * Vue compteur de clics
@@ -55,6 +52,9 @@ public class CompteurView extends JPanel implements Observer {
 		this.add(cpt,BorderLayout.EAST);
 	}
 	
+	/**
+	 * Actualise le compteur de clics
+	 */
 	public void rafraichitCpt() {
 		String strCpt = Integer.toString(gc.getCpt());
 		cpt.setText(strCpt);

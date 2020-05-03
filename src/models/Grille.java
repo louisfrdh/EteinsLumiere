@@ -12,8 +12,10 @@ public class Grille extends Observable{
 	
 	public static final int TAILLE = 5;
 	private Case[][] cases;
-	private int cpt;
-	private boolean enJeu;
+	private final static int NBLUM = 8;
+	private int cptClics;
+	private int cptLumieres;
+	private Etat etat;
 	
 	/**
 	 * Constructeur avec taille par défaut
@@ -26,8 +28,8 @@ public class Grille extends Observable{
 			}
 		}
 		melanger();
-		enJeu = true;
-		cpt = 0;
+		etat = Etat.JEU;
+		cptClics = 0;
 	}
 	
 	/**
@@ -72,14 +74,28 @@ public class Grille extends Observable{
 	 * @param le tableau contenant les cases affectées
 	 */
 	public void toucherCase(int indiceX, int indiceY) {
-		if(enJeu) {
-			cpt++;
+		switch(etat) {
+		case JEU :
+			cptClics++;
 			Case affectees[] = this.trouverAdj(indiceX, indiceY);
 			for(Case c : affectees) {
-				c.changerEtat();
+				if(c.changerEtat()) {
+					cptLumieres++;
+				} else {
+					cptLumieres--;
+				}
 			}
-		} else {
-			cases[indiceX][indiceY].changerEtat();
+			if (cptLumieres<=0) etat=Etat.FINI;
+			break;
+		case CONF :
+			if(cases[indiceX][indiceY].changerEtat()) {
+				cptLumieres++;
+			} else {
+				cptLumieres--;
+			}
+			break;
+		case FINI:
+			break;
 		}
 		this.setChanged();
 		this.notifyObservers();
@@ -89,12 +105,14 @@ public class Grille extends Observable{
 	 * Eteint toutes les lumières
 	 */
 	public void effacer() {
+		etat = Etat.CONF;
 		for(int i=0 ; i < TAILLE ; i++) {
 			for(int j=0 ; j < TAILLE ; j++) {
 				cases[i][j].setOn(false);
 			}
 		}
-		cpt = 0;
+		cptClics = 0;
+		cptLumieres = 0;
 		this.setChanged();
 		this.notifyObservers();
 	}
@@ -103,22 +121,24 @@ public class Grille extends Observable{
 	 * Créé une disposition aléatoire de lumières
 	 */
 	public void melanger() {
+		etat = Etat.CONF;
 		int x, y;
-		for(int i=0 ; i < 8 ; i++) {
+		effacer();
+		while(cptLumieres < NBLUM) {
 			x = (int) (Math.random()*4);
 			y = (int) (Math.random()*4);
-			this.getCase(x, y).changerEtat();
+			this.toucherCase(x, y);
 		}
 		this.setChanged();
 		this.notifyObservers();
 	}
 	
-	public void setEnJeu(boolean etat) {
-		enJeu = etat;
+	public void setEtat(Etat etat) {
+		this.etat = etat;
 	}
 	
-	public boolean getEnJeu() {
-		return enJeu;
+	public Etat getEtat() {
+		return etat;
 	}
 	
 	public Case[][] getCases() {
@@ -129,7 +149,11 @@ public class Grille extends Observable{
 		return cases[x][y];
 	}
 	
-	public int getCpt() {
-		return cpt;
+	public int getCptClics() {
+		return cptClics;
+	}
+	
+	public int getCptLumieres() {
+		return cptLumieres;
 	}
 }

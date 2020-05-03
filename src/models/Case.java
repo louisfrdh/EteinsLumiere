@@ -23,13 +23,17 @@ public class Case {
 	
 	/**
 	 * Inverse l'état de la case
+	 * @return si une lumière a été allumée ou non
 	 */
-	public void changerEtat() {
+	public boolean changerEtat() {
+		boolean allume = true;
 		if(getOn()) {
 			on = false;
+			allume = false;
 		} else {
 			on = true;
 		}
+		return allume;
 	}
 	
 	/**

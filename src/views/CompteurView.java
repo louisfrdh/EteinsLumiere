@@ -18,7 +18,7 @@ import controllers.GrilleController;
 @SuppressWarnings({ "deprecation", "serial" })
 public class CompteurView extends JPanel implements Observer {
 
-	public final static int HAUTEUR = 40;
+	public final static int HAUTEUR = 25;
 	private GrilleController gc;
 	private JLabel cpt; 
 	
@@ -45,7 +45,7 @@ public class CompteurView extends JPanel implements Observer {
 	public void ajouteAffCpt() {
 		JPanel jp = new JPanel();
 		JLabel titre = new JLabel("Nb de clic(s) : ");
-		String strCpt = Integer.toString(gc.getCpt());
+		String strCpt = Integer.toString(gc.getCptClics());
 		cpt = new JLabel(strCpt);
 		jp.add(titre,BorderLayout.WEST);
 		this.add(titre,BorderLayout.WEST);
@@ -56,7 +56,7 @@ public class CompteurView extends JPanel implements Observer {
 	 * Actualise le compteur de clics
 	 */
 	public void rafraichitCpt() {
-		String strCpt = Integer.toString(gc.getCpt());
+		String strCpt = Integer.toString(gc.getCptClics());
 		cpt.setText(strCpt);
 	}
 

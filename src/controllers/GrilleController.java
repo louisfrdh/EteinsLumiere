@@ -4,11 +4,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import models.Case;
+import models.Etat;
 import models.Grille;
 import views.GrilleView;
 
 /**
- * Contôleur du modèle Grille
+ * Contrôleur du modèle Grille
  * @author friedrich
  *
  */
@@ -86,12 +87,20 @@ public class GrilleController implements MouseListener {
 		g.melanger();
 	}
 	
-	public void setEnJeu(boolean etat) {
-		g.setEnJeu(etat);
+	public void setEtat(Etat etat) {
+		g.setEtat(etat);
 	}
 	
-	public int getCpt() {
-		return g.getCpt();
+	public Etat getEtat() {
+		return g.getEtat();
+	}
+	
+	public int getCptClics() {
+		return g.getCptClics();
+	}
+	
+	public int getCptLumieres() {
+		return g.getCptLumieres();
 	}
 	
 	public Case getCase(int x, int y) {
